@@ -12,9 +12,9 @@ const Footer = () => {
           backgroundColor: "#f1f1f1",
         }}
       >
-        <p>© 2024 Sunfire Sensei. All rights reserved.</p>
+        <p>©All rights reserved.</p>
         <p>
-          Powered by <a href="https://github.com/ankitpathak62">Ankit Pathak</a>
+          Powered by <a href="https://github.com/Farheen794">Farheen Ahmed</a>
         </p>
         <p>
           <Link to={"/PrivacyPolicy"}>Privacy Policy </Link> |
