@@ -57,47 +57,23 @@ export const postJob = async (req, res) => {
 //Users
 export const getAllJobs = async (req, res) => {
   try {
-    console.log("Query Params:", req.query);
-    const { keyword, location, experience, salary, tech } = req.query;
-
-    let query = {};
-
-    // Keyword search
-    if (keyword) {
-      query.$or = [
+    const keyword = req.query.keyword || "";
+    const query = {
+      $or: [
         { title: { $regex: keyword, $options: "i" } },
         { description: { $regex: keyword, $options: "i" } },
-      ];
-    }
-
-    // Location filter
-    if (location) {
-      query.location = { $regex: location, $options: "i" };
-    }
-
-    // Experience filter (IMPORTANT FIX)
-    if (experience) {
-      query.experienceLevel = experience;
-    }
-
-    // Salary filter (range example)
-    if (salary) {
-      query.salary = { $gte: Number(salary) };
-    }
-
-    // Tech filter (assuming requirements array)
-    if (tech) {
-      query.requirements = { $in: [tech] };
-    }
-
+      ],
+    };
     const jobs = await Job.find(query)
-      .populate("company")
+      .populate({
+        path: "company",
+      })
       .sort({ createdAt: -1 });
 
-    console.log("Fetched Jobs from DB:", jobs);
-
+    if (!jobs) {
+      return res.status(404).json({ message: "No jobs found", status: false });
+    }
     return res.status(200).json({ jobs, status: true });
-
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Server Error", status: false });
