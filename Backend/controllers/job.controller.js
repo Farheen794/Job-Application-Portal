@@ -57,35 +57,22 @@ export const postJob = async (req, res) => {
 //Users
 export const getAllJobs = async (req, res) => {
   try {
-    const { keyword = "", location, experience, salary } = req.query;
-
-    const query = {};
-
-    // keyword searches title/description
-    if (keyword) {
-      query.$or = [
+    const keyword = req.query.keyword || "";
+    const query = {
+      $or: [
         { title: { $regex: keyword, $options: "i" } },
         { description: { $regex: keyword, $options: "i" } },
-      ];
+      ],
+    };
+    const jobs = await Job.find(query)
+      .populate({
+        path: "company",
+      })
+      .sort({ createdAt: -1 });
+
+    if (!jobs) {
+      return res.status(404).json({ message: "No jobs found", status: false });
     }
-
-    // location filter
-    if (location) {
-      query.location = { $regex: location, $options: "i" };
-    }
-
-    // experience filter (e.g. "0-3 years")
-    if (experience) {
-      query.experienceLevel = { $regex: experience, $options: "i" };
-    }
-
-    // salary filter (e.g. "50k-100k")
-    if (salary) {
-      query.salary = { $regex: salary, $options: "i" };
-    }
-
-    const jobs = await Job.find(query).populate({ path: "company" }).sort({ createdAt: -1 });
-
     return res.status(200).json({ jobs, status: true });
   } catch (error) {
     console.error(error);
