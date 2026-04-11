@@ -15,8 +15,14 @@ const useGetAllJobs = () => {
       setLoading(true);
       setError(null);
       try {
+        const params = new URLSearchParams();
+        if (searchedQuery?.filterType === "Location") params.append("location", searchedQuery.value);
+        if (searchedQuery?.filterType === "Technology") params.append("keyword", searchedQuery.value);
+        if (searchedQuery?.filterType === "Experience") params.append("experience", searchedQuery.value);
+        if (searchedQuery?.filterType === "Salary") params.append("salary", searchedQuery.value);
+
         const res = await axios.get(
-          `${JOB_API_ENDPOINT}/get?keyword=${searchedQuery}`,
+          `${JOB_API_ENDPOINT}/get?${params.toString()}`,
           {
             withCredentials: true,
           }
@@ -37,7 +43,7 @@ const useGetAllJobs = () => {
     };
 
     fetchAllJobs();
-  }, [dispatch]);
+  }, [dispatch, searchedQuery]); // Add searchedQuery to dependencies
 
   return { loading, error };
 };

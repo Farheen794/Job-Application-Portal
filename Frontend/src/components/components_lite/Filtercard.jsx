@@ -45,12 +45,13 @@ const filterData = [
 
 const Filter = () => {
   const [selectedValue, setSelectedValue] = useState("");
-  const handleChange = (value) => {
+  const handleChange = (value, filterType) => {
     setSelectedValue(value);
+    dispatch(setSearchedQuery({ value, filterType }));
   };
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(setSearchedQuery(selectedValue));
+    dispatch(setSearchedQuery({ value: selectedValue, filterType: "" }));
   }, [selectedValue]);
 
   return (
@@ -66,7 +67,11 @@ const Filter = () => {
               const itemId = `Id${index}-${indx}`;
               return (
                 <div key={itemId} className="flex items-center space-x-2 my-2">
-                  <RadioGroupItem value={item} id={itemId}></RadioGroupItem>
+                  <RadioGroupItem
+                    value={item}
+                    id={itemId}
+                    onClick={() => handleChange(item, data.filterType)} // pass filterType
+                  />
                   <label htmlFor={itemId}>{item}</label>
                 </div>
               );
