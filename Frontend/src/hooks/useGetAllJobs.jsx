@@ -16,10 +16,8 @@ const useGetAllJobs = () => {
       setError(null);
       try {
         const res = await axios.get(
-          `${JOB_API_ENDPOINT}/get?keyword=${searchedQuery}`,
-          {
-            withCredentials: true,
-          }
+          `${JOB_API_ENDPOINT}/get?keyword=${searchedQuery}&location=${location}&experience=${experience}&salary=${salary}&tech=${tech}`,
+          { withCredentials: true }
         );
         console.log("API Response:", res.data);
         if (res.data.status) {
