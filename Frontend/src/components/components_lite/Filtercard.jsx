@@ -20,11 +20,11 @@ const filterData = [
   {
     filterType: "Technology",
     array: [
-      "Mern",
-      "React",
+      "MERN",
+      "FrontEnd",
       "Data Scientist",
-      "Fullstack",
-      "Node",
+      "Full Stack",
+      "ML",
       "Python",
       "Java",
       "frontend",
@@ -32,10 +32,6 @@ const filterData = [
       "mobile",
       "desktop",
     ],
-  },
-  {
-    filterType: "Experience",
-    array: [0,1,2,3,4],
   },
   {
     filterType: "Salary",
