@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 const Jobs = () => {
   const { allJobs, searchedQuery } = useSelector((store) => store.job);
-  const [filterJobs, setFilterJobs] = useState(allJobs);
+  const [filterJobs, setFilterJobs] = useState([]);
 
   useEffect(() => {
     // If no search query is provided, reset to all jobs
@@ -18,14 +18,16 @@ const Jobs = () => {
     }
 
     // Filter based on the searched query across various fields (title, description, etc.)
-    const filteredJobs = allJobs.filter((job) => {
+        const filteredJobs = allJobs.filter((job) => {
       const query = searchedQuery.toLowerCase();
+      const requirementsText = job.requirements ? (Array.isArray(job.requirements) ? job.requirements.join(' ').toLowerCase() : job.requirements.toLowerCase()) : '';
       return (
         job.title?.toLowerCase().includes(query) ||
         job.description?.toLowerCase().includes(query) ||
         job.location?.toLowerCase().includes(query) ||
         job.experience?.toLowerCase().includes(query) ||
-        job.salary?.toLowerCase().includes(query)
+        job.salary?.toLowerCase().includes(query) ||
+        requirementsText.includes(query)
       );
     });
 
