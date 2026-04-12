@@ -37,10 +37,7 @@ const filterData = [
     filterType: "Salary",
     array: ["40", "35", "15", "50+"],
   },
-  {
-    filterType: "Experience",
-    array: ["0", "1", "2", "3","4", "5+"],
-  }
+  
 ];
 
 const Filter = () => {

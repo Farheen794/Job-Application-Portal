@@ -25,7 +25,7 @@ const Jobs = () => {
         job.title?.toLowerCase().includes(query) ||
         job.description?.toLowerCase().includes(query) ||
         job.location?.toLowerCase().includes(query) ||
-        job.experienceLevel?.includes(query) ||
+        job.experience?.toLowerCase().includes(query) ||
         job.salary?.toLowerCase().includes(query) ||
         requirementsText.includes(query)
       );
