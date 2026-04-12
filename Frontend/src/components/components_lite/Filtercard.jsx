@@ -35,11 +35,11 @@ const filterData = [
   },
   {
     filterType: "Experience",
-    array: ["0", "1", "2", "3", "4", "5+"],
+    array: [0,1,2,3,4],
   },
   {
     filterType: "Salary",
-    array: ["0-50", "50-100", "100-200", "200+"],
+    array: ["40", "35", "15", "50+"],
   },
 ];
 
