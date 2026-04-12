@@ -35,11 +35,11 @@ const filterData = [
   },
   {
     filterType: "Experience",
-    array: ["0-3 years", "3-5 years", "5-7 years", "7+ years"],
+    array: ["0", "1", "2", "3", "4", "5+"],
   },
   {
     filterType: "Salary",
-    array: ["0-50k", "50k-100k", "100k-200k", "200k+"],
+    array: ["0-50", "50-100", "100-200", "200+"],
   },
 ];
 
